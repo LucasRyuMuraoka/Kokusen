@@ -1,24 +1,16 @@
-# Uzumaki-
+# Uzumaki
 Projeto front-end que consome a Dattebayo API e apresenta, de forma interativa, dados sobre o universo Naruto.
 
 # Dattebayo API 🦊🍥
 
-![Naruto Banner](https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg)
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg" alt="Naruto Banner" width="300"/>
+</p>
 
 ## 📖 Sobre
 
 **Dattebayo** é sua plataforma definitiva para tudo relacionado ao anime **Naruto**!  
 Nossa API oferece uma forma prática e poderosa de acessar informações detalhadas sobre personagens, clãs, kekkei-genkai, bijū, equipes, vilarejos e muito mais.
-
----
-
-## 🎯 Nossa Missão
-
-No **Dattebayo**, somos apaixonados por aproximar o universo de Naruto dos fãs e desenvolvedores.  
-Queremos que você crie **aplicações, sites e ferramentas imersivas** que valorizem cada detalhe do anime.
-
-Acreditamos que a beleza do mundo ninja está na sua rica narrativa e nos seus personagens memoráveis.  
-Por isso, oferecemos acesso direto e fácil a essa riqueza de informações.
 
 ---
 
@@ -39,3 +31,42 @@ Por isso, oferecemos acesso direto e fácil a essa riqueza de informações.
 - **♻️ Atualizações constantes** — Nosso conteúdo acompanha as novidades do universo Naruto.
 
 ---
+
+## 🌍 Base URL
+
+https://dattebayo-api.onrender.com
+
+---
+
+## 🔗 Endpoints Principais
+
+| Método | Endpoint                | Descrição                          |
+|--------|-------------------------|-------------------------------------|
+| GET    | `/characters`           | Lista todos os personagens         |
+| GET    | `/characters/:id`       | Detalhes de um personagem          |
+| GET    | `/clans`                | Lista todos os clãs                 |
+| GET    | `/clans/:id`            | Detalhes de um clã                  |
+| GET    | `/kekkei-genkai`        | Lista kekkei-genkai                 |
+| GET    | `/tailed-beasts`        | Lista bijū                          |
+| GET    | `/villages`             | Lista vilarejos                     |
+| GET    | `/teams`                | Lista equipes ninja                 |
+
+---
+
+## 📌 Exemplo de uso
+
+```bash
+# Obter todos os personagens
+https://dattebayo-api.onrender.com/characters
+
+# Obter detalhes do Naruto
+https://dattebayo-api.onrender.com/characters/1
+
+{
+  "id": 1,
+  "name": "Naruto Uzumaki",
+  "village": "Konohagakure",
+  "rank": "Hokage",
+  "affiliations": ["Team 7", "Konoha 11"],
+  "abilities": ["Rasengan", "Shadow Clone Jutsu", "Sage Mode", "Kurama Chakra Mode"]
+}
