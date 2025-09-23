@@ -1,4 +1,4 @@
-# Jujutsu Kaisen API
+# Kokusen
 
 API REST desenvolvida em **Java + Quarkus**, simulando o universo de *Jujutsu Kaisen*.  
 O projeto implementa entidades principais como **Clans, Characters, Techniques e Domain Expansions**, com suporte a paginação, busca, validações e HATEOAS.
@@ -6,7 +6,7 @@ O projeto implementa entidades principais como **Clans, Characters, Techniques e
 ---
 
 ## 🌐 Deploy
-> 🔗 Link do Render: **[colocar aqui]**
+> 🔗 Link do Render: **[[(https://kokusen-lucasryu.onrender.com/q/swagger-ui/]]**
 
 ---
 
@@ -38,7 +38,7 @@ http://localhost:8080
 
 Swagger/OpenAPI disponível em:  
 ```
-https://kokusen-lucasryu.onrender.com/q/swagger-ui/
+http://localhost:8080/q/swagger-ui
 ```
 
 ---
