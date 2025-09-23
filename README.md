@@ -1,72 +1,78 @@
-# Uzumaki
-Projeto front-end que consome a Dattebayo API e apresenta, de forma interativa, dados sobre o universo Naruto.
+# code-with-quarkus
 
-# Dattebayo API 🦊🍥
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg" alt="Naruto Banner" width="300"/>
-</p>
+If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
-## 📖 Sobre
+## Running the application in dev mode
 
-**Dattebayo** é sua plataforma definitiva para tudo relacionado ao anime **Naruto**!  
-Nossa API oferece uma forma prática e poderosa de acessar informações detalhadas sobre personagens, clãs, kekkei-genkai, bijū, equipes, vilarejos e muito mais.
+You can run your application in dev mode that enables live coding using:
 
----
+```shell script
+./mvnw quarkus:dev
+```
 
-## 📦 O que oferecemos
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
-- **🔍 Character Insights** — Explore um vasto acervo de personagens, desde ícones como **Naruto**, **Sasuke** e **Sakura**, até ninjas menos conhecidos que tiveram papéis cruciais.
-- **🏯 Clãs e Kekkei-Genkai** — Descubra os segredos das linhagens sanguíneas e seus poderes únicos.
-- **🦊 Tailed Beasts (Bijū)** — Conheça a história, o poder e as lendas sobre as bestas com cauda.
-- **👥 Times e Vilarejos** — Explore a dinâmica das equipes e as culturas únicas de cada vila oculta.
-- **☁️ Organizações** — Mergulhe nos mistérios da **Akatsuki** e da **Kara**.
+## Packaging and running the application
 
----
+The application can be packaged using:
 
-## 💡 Por que escolher o Dattebayo?
+```shell script
+./mvnw package
+```
 
-- **📚 Dados abrangentes** — Conteúdo cuidadosamente organizado e fiel ao anime.
-- **⚡ Integração fácil** — API simples de usar, mesmo para iniciantes.
-- **♻️ Atualizações constantes** — Nosso conteúdo acompanha as novidades do universo Naruto.
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
 
----
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
-## 🌍 Base URL
+If you want to build an _über-jar_, execute the following command:
 
-https://dattebayo-api.onrender.com
+```shell script
+./mvnw package -Dquarkus.package.jar.type=uber-jar
+```
 
----
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-## 🔗 Endpoints Principais
+## Creating a native executable
 
-| Método | Endpoint                | Descrição                          |
-|--------|-------------------------|-------------------------------------|
-| GET    | `/characters`           | Lista todos os personagens         |
-| GET    | `/characters/:id`       | Detalhes de um personagem          |
-| GET    | `/clans`                | Lista todos os clãs                 |
-| GET    | `/clans/:id`            | Detalhes de um clã                  |
-| GET    | `/kekkei-genkai`        | Lista kekkei-genkai                 |
-| GET    | `/tailed-beasts`        | Lista bijū                          |
-| GET    | `/villages`             | Lista vilarejos                     |
-| GET    | `/teams`                | Lista equipes ninja                 |
+You can create a native executable using:
 
----
+```shell script
+./mvnw package -Dnative
+```
 
-## 📌 Exemplo de uso
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
 
-```bash
-# Obter todos os personagens
-https://dattebayo-api.onrender.com/characters
+```shell script
+./mvnw package -Dnative -Dquarkus.native.container-build=true
+```
 
-# Obter detalhes do Naruto
-https://dattebayo-api.onrender.com/characters/1
+You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
 
-{
-  "id": 1,
-  "name": "Naruto Uzumaki",
-  "village": "Konohagakure",
-  "rank": "Hokage",
-  "affiliations": ["Team 7", "Konoha 11"],
-  "abilities": ["Rasengan", "Shadow Clone Jutsu", "Sage Mode", "Kurama Chakra Mode"]
-}
+If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+
+## Related Guides
+
+- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
+- JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
+- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
+- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
+
+## Provided Code
+
+### Hibernate ORM
+
+Create your first JPA entity
+
+[Related guide section...](https://quarkus.io/guides/hibernate-orm)
+
+[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+
+
+### REST
+
+Easily start your REST Web Services
+
+[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)

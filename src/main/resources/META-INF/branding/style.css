@@ -1,0 +1,364 @@
+@charset "UTF-8";
+
+/*
+  Jujutsu Kaisen Inspired Swagger UI Theme
+  ---
+  Palette & Philosophy:
+  - Background: A deep, dark navy/charcoal, reminiscent of the series' moody atmosphere.
+  - Primary Accent: A vibrant purple (#8b5cf6), representing the glow of Cursed Energy.
+  - HTTP Methods: Colors are inspired by key characters and concepts.
+    - GET (Blue): Gojo's "Infinity".
+    - POST (Green): General-purpose, positive action.
+    - PUT (Orange): A warning/modification color.
+    - DELETE (Red): Sukuna's destructive power.
+  - Simplicity: Reduced gradients, shadows, and animations for a cleaner, more focused UI.
+  - Effects: Subtle glows on hover/focus to simulate Cursed Energy auras.
+*/
+
+:root {
+    --font-body: 'Open Sans', sans-serif;
+    --font-heading: 'Titillium Web', sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+
+    --color-bg-deep: #0f172a; /* Deep Slate background */
+    --color-bg-surface: #1e293b; /* Lighter Slate for surfaces */
+    --color-text-primary: #e2e8f0; /* Light Slate text */
+    --color-text-secondary: #94a3b8; /* Muted Slate text */
+
+    --color-accent-purple: #8b5cf6; /* Cursed Energy Purple */
+    --color-accent-glow: rgba(139, 92, 246, 0.4);
+
+    --color-get: #3b82f6;      /* Gojo Blue */
+    --color-post: #22c55e;     /* General Green */
+    --color-put: #f97316;      /* Update Orange */
+    --color-delete: #ef4444;   /* Sukuna Red */
+    --color-patch: #a855f7;    /* Patch Purple */
+    --color-options: #14b8a6;  /* Options Teal */
+
+    --border-radius: 6px;
+    --transition-speed: 0.2s ease-in-out;
+}
+
+/* Base & Typography */
+.swagger-ui html {
+    box-sizing: border-box;
+}
+.swagger-ui *, .swagger-ui :after, .swagger-ui :before {
+    box-sizing: inherit;
+}
+.swagger-ui body {
+    margin: 0;
+    background-color: var(--color-bg-deep);
+    background-image: radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1), transparent 30%),
+    radial-gradient(circle at 80% 90%, rgba(59, 130, 246, 0.1), transparent 35%);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+}
+
+/* Layout */
+.swagger-ui .wrapper {
+    max-width: 1460px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Topbar */
+.swagger-ui .topbar {
+    background-color: var(--color-bg-surface);
+    border-bottom: 2px solid var(--color-accent-purple);
+    box-shadow: 0 2px 20px var(--color-accent-glow);
+    padding: 12px 30px;
+}
+.swagger-ui .topbar a {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+/* Main Info Section */
+.swagger-ui .info {
+    margin: 40px 0;
+}
+.swagger-ui .info .title {
+    font-family: var(--font-heading);
+    font-size: 36px;
+}
+
+/* Operation Blocks (Main Containers) */
+.swagger-ui .opblock-tag-section {
+    margin-bottom: 20px;
+}
+.swagger-ui .opblock-tag {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: var(--color-accent-purple);
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+.swagger-ui .opblock-tag:hover {
+    background-color: rgba(139, 92, 246, 0.1);
+}
+.swagger-ui .opblock-tag svg {
+    fill: var(--color-accent-purple);
+    transition: transform var(--transition-speed);
+}
+.swagger-ui section.is-open .opblock-tag svg {
+    transform: rotate(90deg);
+}
+
+.swagger-ui .opblock {
+    margin: 0 0 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-bg-surface);
+    background-color: rgba(30, 41, 59, 0.5);
+    overflow: hidden;
+    transition: all var(--transition-speed);
+}
+.swagger-ui .opblock:hover {
+    border-color: var(--color-accent-purple);
+    box-shadow: 0 0 20px var(--color-accent-glow);
+}
+.swagger-ui .opblock.is-open {
+    border-color: var(--color-accent-purple);
+    background-color: var(--color-bg-surface);
+}
+
+.swagger-ui .opblock .opblock-summary {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* HTTP Method Badges */
+.swagger-ui .opblock .opblock-summary-method {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    min-width: 80px;
+    padding: 8px 15px;
+    text-align: center;
+    border-radius: 4px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.swagger-ui .opblock.opblock-get .opblock-summary-method { background-color: var(--color-get); }
+.swagger-ui .opblock.opblock-post .opblock-summary-method { background-color: var(--color-post); }
+.swagger-ui .opblock.opblock-put .opblock-summary-method { background-color: var(--color-put); }
+.swagger-ui .opblock.opblock-delete .opblock-summary-method { background-color: var(--color-delete); }
+.swagger-ui .opblock.opblock-patch .opblock-summary-method { background-color: var(--color-patch); }
+.swagger-ui .opblock.opblock-options .opblock-summary-method { background-color: var(--color-options); }
+
+.swagger-ui .opblock .opblock-summary-path {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    padding: 0 15px;
+}
+.swagger-ui .opblock .opblock-summary-description {
+    color: var(--color-text-secondary);
+}
+
+/* Buttons */
+.swagger-ui .btn {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: 2px solid var(--color-accent-purple);
+    border-radius: var(--border-radius);
+    color: var(--color-accent-purple);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+.swagger-ui .btn:hover {
+    background-color: var(--color-accent-purple);
+    color: #fff;
+    box-shadow: 0 0 15px var(--color-accent-glow);
+    transform: translateY(-2px);
+}
+.swagger-ui .btn.execute {
+    background-color: var(--color-accent-purple);
+    color: #fff;
+    animation: pulse 2s infinite;
+}
+.swagger-ui .btn.cancel {
+    border-color: var(--color-delete);
+    color: var(--color-delete);
+}
+.swagger-ui .btn.cancel:hover {
+    background-color: var(--color-delete);
+    color: #fff;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+    70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+}
+
+/* Parameters & Responses */
+.swagger-ui .opblock-section-header {
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--color-bg-surface);
+}
+.swagger-ui .opblock-section-header h4 {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary);
+    margin: 0;
+}
+.swagger-ui .table-container, .swagger-ui .responses-inner {
+    padding: 20px;
+}
+.swagger-ui table thead tr th {
+    font-family: var(--font-heading);
+    text-align: left;
+    color: var(--color-text-secondary);
+    border-bottom: 2px solid var(--color-bg-surface);
+    padding-bottom: 10px;
+}
+.swagger-ui .parameter__name {
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+.swagger-ui .parameter__name.required:after {
+    content: "required";
+    color: var(--color-delete);
+    font-size: 10px;
+    margin-left: 8px;
+    text-transform: uppercase;
+}
+.swagger-ui .parameter__in {
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+.swagger-ui .opblock-body pre {
+    font-family: var(--font-mono);
+    background-color: var(--color-bg-deep);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-bg-surface);
+    color: var(--color-text-primary);
+}
+
+/* Inputs, Textareas, Selects */
+.swagger-ui input[type=text],
+.swagger-ui input[type=password],
+.swagger-ui textarea,
+.swagger-ui select {
+    font-family: var(--font-mono);
+    background-color: var(--color-bg-deep);
+    border: 1px solid var(--color-bg-surface);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    color: var(--color-text-primary);
+    width: 100%;
+    transition: all var(--transition-speed);
+}
+.swagger-ui input[type=text]:focus,
+.swagger-ui input[type=password]:focus,
+.swagger-ui textarea:focus,
+.swagger-ui select:focus {
+    outline: none;
+    border-color: var(--color-accent-purple);
+    box-shadow: 0 0 10px var(--color-accent-glow);
+}
+.swagger-ui textarea {
+    min-height: 150px;
+}
+.swagger-ui label {
+    font-family: var(--font-heading);
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Models Section */
+.swagger-ui section.models {
+    border: 1px solid var(--color-bg-surface);
+    border-radius: var(--border-radius);
+    background-color: rgba(30, 41, 59, 0.5);
+}
+.swagger-ui section.models h4 {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    color: var(--color-accent-purple);
+    padding: 15px 20px;
+    margin: 0;
+    cursor: pointer;
+}
+.swagger-ui .model-container {
+    padding: 0 20px 20px;
+}
+.swagger-ui .model-title {
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+}
+.swagger-ui .model {
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+}
+
+/* Modal / Dialog */
+.swagger-ui .dialog-ux .backdrop-ux {
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(5px);
+}
+.swagger-ui .dialog-ux .modal-ux {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-accent-purple);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px var(--color-accent-glow);
+}
+.swagger-ui .dialog-ux .modal-ux-header {
+    border-bottom: 1px solid var(--color-bg-deep);
+}
+.swagger-ui .dialog-ux .modal-ux-header h3 {
+    font-family: var(--font-heading);
+    color: var(--color-accent-purple);
+}
+
+/* Custom Scrollbar */
+.swagger-ui ::-webkit-scrollbar {
+    width: 10px;
+}
+.swagger-ui ::-webkit-scrollbar-track {
+    background: var(--color-bg-surface);
+}
+.swagger-ui ::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent-purple);
+    border-radius: 5px;
+}
+.swagger-ui ::-webkit-scrollbar-thumb:hover {
+    background-color: #a855f7; /* Lighter Purple */
+}
+
+/* Entry Animation */
+.swagger-ui .opblock, .swagger-ui .info, .swagger-ui section.models {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered animation delay for operation blocks */
+.swagger-ui .opblock:nth-child(1) { animation-delay: 0.1s; }
+.swagger-ui .opblock:nth-child(2) { animation-delay: 0.2s; }
+.swagger-ui .opblock:nth-child(3) { animation-delay: 0.3s; }
+.swagger-ui .opblock:nth-child(4) { animation-delay: 0.4s; }
