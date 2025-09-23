@@ -6,7 +6,7 @@ O projeto implementa entidades principais como **Clans, Characters, Techniques e
 ---
 
 ## 🌐 Deploy
-> 🔗 Link do Render: **[[(https://kokusen-lucasryu.onrender.com/q/swagger-ui/]]**
+> 🔗 Link do Render: **https://kokusen-lucasryu.onrender.com/q/swagger-ui/**
 
 ---
 
@@ -49,7 +49,7 @@ http://localhost:8080/q/swagger-ui
 - **dto/** → Objetos de requisição (Request DTOs)  
 - **representation/** → Objetos de resposta (HATEOAS)  
 - **resource/** → Endpoints REST (Resources)  
-- **SearchResponses/** → Respostas paginadas de list/search  
+- **dto/SearchResponses/** → Respostas paginadas de list/search  
 
 ---
 
