@@ -17,8 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Priority(Priorities.AUTHENTICATION)
 public class RateLimitFilter implements ContainerRequestFilter, ContainerResponseFilter {
 
-    private static final int LIMIT = 10;
-    private static final int WINDOW_SECONDS = 60;
+    private static final int LIMIT = 18;
+    private static final int WINDOW_SECONDS = 30;
     private static final Map<String, RequestInfo> requestCounts = new ConcurrentHashMap<>();
 
     @Override
