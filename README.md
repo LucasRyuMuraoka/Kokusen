@@ -24,8 +24,8 @@ O projeto implementa entidades principais como **Clans, Characters, Techniques e
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/jujutsu-kaisen-api.git
-cd jujutsu-kaisen-api
+git clone https://github.com/LucasRyuMuraoka/Kokusen.git
+cd Kokusen
 
 # Rodar local
 ./mvnw quarkus:dev
