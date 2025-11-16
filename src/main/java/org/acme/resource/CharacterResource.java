@@ -2,6 +2,7 @@ package org.acme.resource;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Sort;
+import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import org.acme.dto.CharacterRequest;
 import org.acme.dto.SearchCharacterResponse;
