@@ -8,6 +8,7 @@ import org.acme.dto.ClanRequest;
 import org.acme.dto.SearchClanResponse;
 import org.acme.entity.Clan;
 import org.acme.entity.Character;
+import org.acme.idempotency.IdempotencyService;
 import org.acme.representation.CharacterRepresentation;
 import org.acme.representation.ClanRepresentation;
 
@@ -174,7 +175,8 @@ public class ClanResource {
     @APIResponses({
             @APIResponse(responseCode = "201", description = "Clã criado com sucesso"),
             @APIResponse(responseCode = "400", description = "Dados inválidos"),
-            @APIResponse(responseCode = "409", description = "Nome de clã já existente")
+            @APIResponse(responseCode = "409", description = "Nome de clã já existente"),
+            @APIResponse(responseCode = "409", description = "Conflito de Idempotência")
     })
     @RequestBody(
             required = true,
@@ -183,7 +185,9 @@ public class ClanResource {
                     schema = @Schema(implementation = ClanRequest.class)
             )
     )
-    public Response create(@Valid ClanRequest input, @Context UriInfo uriInfo) {
+    public Response create(@Valid ClanRequest input,
+                           @Context UriInfo uriInfo) {
+
         if (input.name == null || input.name.isBlank()) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(Map.of("error", "Clan name is required")).build();
@@ -201,6 +205,7 @@ public class ClanResource {
         URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(entity.id)).build();
         return Response.created(uri).entity(ClanRepresentation.from(entity)).build();
     }
+
 
     @PUT
     @Path("{id}")

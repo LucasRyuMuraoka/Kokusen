@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.acme.dto.SearchTechniqueResponse;
 import org.acme.dto.TechniqueRequest;
 import org.acme.entity.Technique;
+import org.acme.idempotency.IdempotencyService;
 import org.acme.representation.CharacterRepresentation;
 import org.acme.representation.TechniqueRepresentation;
 
@@ -176,7 +177,8 @@ public class TechniqueResource {
     @APIResponses({
             @APIResponse(responseCode = "201", description = "Técnica criada com sucesso"),
             @APIResponse(responseCode = "400", description = "Dados inválidos"),
-            @APIResponse(responseCode = "409", description = "Nome de técnica já existente")
+            @APIResponse(responseCode = "409", description = "Nome de técnica já existente"),
+            @APIResponse(responseCode = "409", description = "Conflito de Idempotência")
     })
     @RequestBody(
             required = true,
@@ -185,7 +187,9 @@ public class TechniqueResource {
                     schema = @Schema(implementation = TechniqueRequest.class)
             )
     )
-    public Response create(@Valid TechniqueRequest input, @Context UriInfo uriInfo) {
+    public Response create(@Valid TechniqueRequest input,
+                           @Context UriInfo uriInfo) {
+
         if (input.name == null || input.name.isBlank()) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(Map.of("error", "Technique name is required")).build();
@@ -197,7 +201,10 @@ public class TechniqueResource {
                     .entity(Map.of("error", "Technique with this name already exists")).build();
         }
 
-        Technique entity = new Technique(input.name, input.description != null ? input.description : "");
+        Technique entity = new Technique(
+                input.name,
+                input.description != null ? input.description : ""
+        );
         entity.persist();
 
         URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(entity.id)).build();

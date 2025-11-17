@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.acme.dto.DomainExpansionRequest;
 import org.acme.dto.SearchDomainExpansionResponse;
 import org.acme.entity.DomainExpansion;
+import org.acme.idempotency.IdempotencyService;
 import org.acme.representation.DomainExpansionRepresentation;
 
 import jakarta.transaction.Transactional;
@@ -172,7 +173,8 @@ public class DomainExpansionResource {
     @APIResponses({
             @APIResponse(responseCode = "201", description = "Expansão criada com sucesso"),
             @APIResponse(responseCode = "400", description = "Dados inválidos"),
-            @APIResponse(responseCode = "409", description = "Nome já existente")
+            @APIResponse(responseCode = "409", description = "Nome já existente"),
+            @APIResponse(responseCode = "409", description = "Conflito de Idempotência")
     })
     @RequestBody(
             required = true,
@@ -180,7 +182,9 @@ public class DomainExpansionResource {
                     mediaType = "application/json",
                     schema = @Schema(implementation = DomainExpansionRequest.class))
     )
-    public Response create(@Valid DomainExpansionRequest input, @Context UriInfo uriInfo) {
+    public Response create(@Valid DomainExpansionRequest input,
+                           @Context UriInfo uriInfo) {
+
         if (input.name == null || input.name.isBlank()) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(Map.of("error", "DomainExpansion name is required")).build();
@@ -192,7 +196,11 @@ public class DomainExpansionResource {
                     .entity(Map.of("error", "DomainExpansion with this name already exists")).build();
         }
 
-        DomainExpansion entity = new DomainExpansion(input.name, input.effect != null ? input.effect : "", null);
+        DomainExpansion entity = new DomainExpansion(
+                input.name,
+                input.effect != null ? input.effect : "",
+                null
+        );
         entity.persist();
 
         URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(entity.id)).build();

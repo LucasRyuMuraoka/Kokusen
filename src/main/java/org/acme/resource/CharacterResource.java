@@ -8,6 +8,7 @@ import org.acme.dto.CharacterRequest;
 import org.acme.dto.SearchCharacterResponse;
 import org.acme.entity.*;
 import org.acme.entity.Character;
+import org.acme.idempotency.IdempotencyService;
 import org.acme.representation.CharacterRepresentation;
 
 import jakarta.transaction.Transactional;
@@ -168,14 +169,14 @@ public class CharacterResource {
         return Response.ok(response).build();
     }
 
-
     @POST
     @Operation(summary = "Cria um novo personagem",
             description = "Cria e persiste um personagem com as informações fornecidas"
     )
     @APIResponses({
             @APIResponse(responseCode = "201", description = "Personagem criado com sucesso"),
-            @APIResponse(responseCode = "400", description = "Dados inválidos")
+            @APIResponse(responseCode = "400", description = "Dados inválidos"),
+            @APIResponse(responseCode = "409", description = "Conflito de Idempotência")
     })
     @RequestBody(
             required = true,
@@ -185,7 +186,9 @@ public class CharacterResource {
             )
     )
     @Transactional
-    public Response create(@Valid CharacterRequest input, @Context UriInfo uriInfo) {
+    public Response create(@Valid CharacterRequest input,
+                           @Context UriInfo uriInfo) {
+
         if (input.name == null || input.name.isBlank()) {
             return Response.status(Response.Status.BAD_REQUEST).entity(Map.of("error", "Character name is required")).build();
         }
